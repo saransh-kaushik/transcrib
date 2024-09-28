@@ -71,4 +71,3 @@ This project is licensed under the MIT License. See the [LICENSE](./LICENSE) fil
 
 For any inquiries, feel free to reach out via email:
 - **[Pushparaj Mehta]** - pushparajmehta002@gmail.com
-```
