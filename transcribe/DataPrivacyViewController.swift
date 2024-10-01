@@ -10,99 +10,92 @@ import UIKit
 
 class DataPrivacyViewController: UIViewController {
 
-    let customTintColor = UIColor(hex: "#FF6026")
+    private let dataCollectionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Data Collection"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
-    let titleLabel: UILabel = {
+    private let locationDataSwitch: UISwitch = {
+        let toggle = UISwitch()
+        toggle.translatesAutoresizingMaskIntoConstraints = false
+        return toggle
+    }()
+
+    private let locationDataLabel: UILabel = {
         let label = UILabel()
-        label.text = "Data Privacy"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.text = "Location Data"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    let descriptionLabel: UILabel = {
+
+    private let usageAnalyticsSwitch: UISwitch = {
+        let toggle = UISwitch()
+        toggle.translatesAutoresizingMaskIntoConstraints = false
+        return toggle
+    }()
+
+    private let usageAnalyticsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Manage your data privacy settings."
-        label.numberOfLines = 0
+        label.text = "Usage Analytics"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    let privacySwitch: UISwitch = {
-        let privacySwitch = UISwitch()
-        privacySwitch.translatesAutoresizingMaskIntoConstraints = false
-        return privacySwitch
+
+    private let personalizationDataSwitch: UISwitch = {
+        let toggle = UISwitch()
+        toggle.translatesAutoresizingMaskIntoConstraints = false
+        return toggle
     }()
-    
-    let privacySwitchLabel: UILabel = {
+
+    private let personalizationDataLabel: UILabel = {
         let label = UILabel()
-        label.text = "Enable Data Privacy"
+        label.text = "Personalization Data"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    
-    let moreInfoButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("More Info", for: .normal)
-        button.tintColor = UIColor.white
-        button.backgroundColor = UIColor(hex: "#FF6026")
-        button.layer.cornerRadius = 8
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(DataPrivacyViewController.self, action: #selector(moreInfoTapped), for: .touchUpInside)
-        return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
+        title = "Data Privacy" // Set the screen title
         setupUI()
     }
 
     private func setupUI() {
-        // Add views to the main view
-        view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
-        view.addSubview(privacySwitch)
-        view.addSubview(privacySwitchLabel)
-        view.addSubview(moreInfoButton)
+        view.backgroundColor = .white
 
-        // Constraints for title label
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-        
-        // Constraints for description label
-        NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        // Constraints for privacy switch label
-        NSLayoutConstraint.activate([
-            privacySwitchLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
-            privacySwitchLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-        
-        // Constraints for privacy switch
-        NSLayoutConstraint.activate([
-            privacySwitch.centerYAnchor.constraint(equalTo: privacySwitchLabel.centerYAnchor),
-            privacySwitch.leadingAnchor.constraint(equalTo: privacySwitchLabel.trailingAnchor, constant: 10)
-        ])
-        
-        // Constraints for more info button
-        NSLayoutConstraint.activate([
-            moreInfoButton.topAnchor.constraint(equalTo: privacySwitchLabel.bottomAnchor, constant: 40),
-            moreInfoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            moreInfoButton.widthAnchor.constraint(equalToConstant: 120),
-            moreInfoButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
-    }
+        view.addSubview(dataCollectionLabel)
+        view.addSubview(locationDataLabel)
+        view.addSubview(locationDataSwitch)
+        view.addSubview(usageAnalyticsLabel)
+        view.addSubview(usageAnalyticsSwitch)
+        view.addSubview(personalizationDataLabel)
+        view.addSubview(personalizationDataSwitch)
 
-    @objc func moreInfoTapped() {
-        // Implement the action for the button tap
-        print("More Info button tapped")
+        NSLayoutConstraint.activate([
+            // Data Collection Label
+            dataCollectionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            dataCollectionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+
+            // Location Data Switch and Label
+            locationDataLabel.topAnchor.constraint(equalTo: dataCollectionLabel.bottomAnchor, constant: 20),
+            locationDataLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            locationDataSwitch.centerYAnchor.constraint(equalTo: locationDataLabel.centerYAnchor),
+            locationDataSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            // Usage Analytics Switch and Label
+            usageAnalyticsLabel.topAnchor.constraint(equalTo: locationDataLabel.bottomAnchor, constant: 20),
+            usageAnalyticsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            usageAnalyticsSwitch.centerYAnchor.constraint(equalTo: usageAnalyticsLabel.centerYAnchor),
+            usageAnalyticsSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            // Personalization Data Switch and Label
+            personalizationDataLabel.topAnchor.constraint(equalTo: usageAnalyticsLabel.bottomAnchor, constant: 20),
+            personalizationDataLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            personalizationDataSwitch.centerYAnchor.constraint(equalTo: personalizationDataLabel.centerYAnchor),
+            personalizationDataSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        ])
     }
 }

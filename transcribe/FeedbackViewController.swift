@@ -45,6 +45,7 @@ class FeedbackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Feedback"
         setupUI()
         
         // Set the delegate for the feedback text view

@@ -5,21 +5,12 @@
 //  Created by Hompushparaj Mehta on 01/10/24.
 //
 
-
 import UIKit
 
 class NotificationsViewController: UIViewController {
 
     let customTintColor = UIColor(hex: "#FF6026")
 
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Notification Settings"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     let enableNotificationsSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.isOn = true // Default state
@@ -83,19 +74,19 @@ class NotificationsViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#FF6026")
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(saveSettingsTapped), for: .touchUpInside)
+        button.addTarget(NotificationsViewController.self, action: #selector(saveSettingsTapped), for: .touchUpInside)
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Notification"
         setupUI()
     }
 
     private func setupUI() {
         // Add views to the main view
-        view.addSubview(titleLabel)
         view.addSubview(enableNotificationsLabel)
         view.addSubview(enableNotificationsSwitch)
         view.addSubview(messageNotificationsLabel)
@@ -106,16 +97,10 @@ class NotificationsViewController: UIViewController {
         view.addSubview(likeNotificationsSwitch)
         view.addSubview(saveButton)
 
-        // Constraints for title label
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-        
         // Constraints for enable notifications label
         NSLayoutConstraint.activate([
-            enableNotificationsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            enableNotificationsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+            enableNotificationsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            enableNotificationsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         ])
         
         // Constraints for enable notifications switch

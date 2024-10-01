@@ -49,13 +49,14 @@ class AboutViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#FF6026")
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(dismissTapped), for: .touchUpInside)
+        button.addTarget(AboutViewController.self, action: #selector(dismissTapped), for: .touchUpInside)
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "About"
         setupUI()
     }
 

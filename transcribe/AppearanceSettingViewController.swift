@@ -10,14 +10,6 @@ import UIKit
 class AppearanceSettingViewController: UIViewController {
 
     let customTintColor = UIColor(hex: "#FF6026")
-
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Appearance Settings"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     
     let themeLabel: UILabel = {
         let label = UILabel()
@@ -69,19 +61,19 @@ class AppearanceSettingViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#FF6026")
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(saveSettingsTapped), for: .touchUpInside)
+        button.addTarget(AppearanceSettingViewController.self, action: #selector(saveSettingsTapped), for: .touchUpInside)
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Appearance Settings"
         setupUI()
     }
 
     private func setupUI() {
         // Add views to the main view
-        view.addSubview(titleLabel)
         view.addSubview(themeLabel)
         view.addSubview(lightThemeButton)
         view.addSubview(darkThemeButton)
@@ -89,16 +81,10 @@ class AppearanceSettingViewController: UIViewController {
         view.addSubview(fontSizeSlider)
         view.addSubview(saveButton)
 
-        // Constraints for title label
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
-        ])
-        
         // Constraints for theme label
         NSLayoutConstraint.activate([
-            themeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
-            themeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+            themeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            themeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20) // Adjusted top constraint
         ])
         
         // Constraints for light theme button
