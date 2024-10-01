@@ -14,7 +14,6 @@ class AudioPlayerViewController: UIViewController {
     var audioPlayer: AVAudioPlayer?
     var timer: Timer?
     
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -102,13 +101,36 @@ class AudioPlayerViewController: UIViewController {
     }
 
     private func loadAudio(at path: String) {
-        guard let url = URL(string: path) else { return }
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.prepareToPlay()
-        } catch {
-            print("Error loading audio: \(error)")
+        let fileURL = URL(fileURLWithPath: path)
+        print(fileURL)
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            print("File exists at \(fileURL.path)")
+        } else {
+            print("File does not exist at \(fileURL.path)")
         }
+        
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                let audioPath = URL(fileURLWithPath: fileURL.path)
+                print("Audio Path \(audioPath)")
+                audioPlayer = try AVAudioPlayer(contentsOf: audioPath)
+                audioPlayer?.prepareToPlay()
+                
+                // Set the duration in the timestamp label
+                let duration = formatTime(audioPlayer?.duration ?? 0)
+                timestampLabel.text = "00:00 / \(duration)" // Initialize label with duration
+                print("Audio player initialized successfully with URL: \(fileURL)")
+            } catch {
+                print("Error loading audio: \(error)")
+            }
+        } else {
+            print("Audio file does not exist at path: \(fileURL.path)")
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 
     @objc func playAudio() {
@@ -122,34 +144,34 @@ class AudioPlayerViewController: UIViewController {
     }
     
     private func startTimer() {
-           // Invalidate previous timer if any
-           stopTimer()
-           
-           // Start a new timer to update the timestamp every second
-           timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimestampLabel), userInfo: nil, repeats: true)
-       }
+        // Invalidate previous timer if any
+        stopTimer()
+        
+        // Start a new timer to update the timestamp every second
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimestampLabel), userInfo: nil, repeats: true)
+    }
 
-       private func stopTimer() {
-           timer?.invalidate()
-           timer = nil
-       }
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
 
-       @objc private func updateTimestampLabel() {
-           guard let audioPlayer = audioPlayer else { return }
+    @objc private func updateTimestampLabel() {
+        guard let audioPlayer = audioPlayer else { return }
 
-           let currentTime = formatTime(audioPlayer.currentTime)
-           let duration = formatTime(audioPlayer.duration)
+        let currentTime = formatTime(audioPlayer.currentTime)
+        let duration = formatTime(audioPlayer.duration)
 
-           timestampLabel.text = "\(currentTime) / \(duration)"
-       }
+        timestampLabel.text = "\(currentTime) / \(duration)"
+    }
 
-       private func formatTime(_ time: TimeInterval) -> String {
-           let minutes = Int(time) / 60
-           let seconds = Int(time) % 60
-           return String(format: "%02d:%02d", minutes, seconds)
-       }
+    private func formatTime(_ time: TimeInterval) -> String {
+        let minutes = Int(time) / 60
+        let seconds = Int(time) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
 
-       deinit {
-           stopTimer()  // Ensure timer is invalidated when the view controller is deallocated
-       }
+    deinit {
+        stopTimer()  // Ensure timer is invalidated when the view controller is deallocated
+    }
 }
