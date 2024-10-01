@@ -31,6 +31,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var recentConversationTableView: UITableView!
     
     var actions: [AudioAction] = []
+    var fileMonitorSource: DispatchSourceFileSystemObject?
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,8 +138,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         recentConversationTableView.delegate = self
         
         actions = loadAudioActions()
+
     }
-
-
+    
+    // Reload audio actions and refresh the table when the view appears
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Reload the audio actions and refresh the table view
+        actions = loadAudioActions()
+        recentConversationTableView.reloadData()
+    }
 }
 
