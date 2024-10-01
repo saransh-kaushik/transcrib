@@ -7,24 +7,32 @@
 
 import UIKit
 
+// Move AudioAction struct outside of ViewController so it can be used globally
+struct AudioAction: Codable {
+    let titleLabel: String
+    let subTitleLabel: String
+    let timestampLabel: String
+    let audioPath: String
+    
+    var playIcon: String {
+        switch titleLabel {
+        case "Text to Speech":
+            return "play.circle"
+        case "Speech to Text":
+            return "microphone"
+        default:
+            return "questionmark.circle"
+        }
+    }
+}
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    struct AudioAction {
-        let titleLabel: String
-        let subTitleLabel: String
-        let timestampLabel: String
-        let playIcon: String
-    }
-
-    let actions: [AudioAction] = [
-        AudioAction(titleLabel: "Speech to Text", subTitleLabel: "Voice Memo", timestampLabel: "2024-09-30 3:45 PM", playIcon: "microphone"),
-        AudioAction(titleLabel: "Text to Speech", subTitleLabel: "Book Summary", timestampLabel: "2024-09-30 2:00 PM", playIcon: "play.circle"),
-        AudioAction(titleLabel: "Speech to Text", subTitleLabel: "Meeting Notes", timestampLabel: "2024-09-30 12:30 PM", playIcon: "microphone"),
-        AudioAction(titleLabel: "Text to Speech", subTitleLabel: "Podcast", timestampLabel: "2024-09-30 11:15 AM", playIcon: "play.circle"),
-        AudioAction(titleLabel: "Text to Speech", subTitleLabel: "News article", timestampLabel: "2024-09-30 9:41 AM", playIcon: "play.circle"),
-        AudioAction(titleLabel: "Speech to Text", subTitleLabel: "Lecture Summary", timestampLabel: "2024-09-30 10:00 AM", playIcon: "microphone"),
-    ]
+    @IBOutlet weak var recentConversationTableView: UITableView!
     
+    var actions: [AudioAction] = []
+    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return actions.count
     }
@@ -32,19 +40,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Function to display recent conversation dynamically
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue the reusable cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
-        // Get the current action based on the index path
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as! ConversationTableViewCell
+//         Get the current action based on the index path
         let action = actions[indexPath.row]
         
-        cell.playIcon.image = UIImage(systemName: action.playIcon)
-        cell.titleLabel.text = action.titleLabel
-        cell.subtitleLabel.text = "\(action.subTitleLabel) - \(timeDifference(from: action.timestampLabel) ?? "0 min ago")"
+        cell.conversationImage.image = UIImage(systemName: action.playIcon)
+        cell.conversationTitle.text = action.titleLabel
+        cell.conversationSubtitle.text = "\(action.subTitleLabel) - \(timeDifference(from: action.timestampLabel) ?? "0 min ago")"
         
         if let time = extractTime(from: action.timestampLabel){
-            cell.timestampLabel.text = time
+            cell.conversationTime.text = time
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedAction = actions[indexPath.row]
+        
+        // Initialize AudioPlayerViewController programmatically
+        let audioPlayerVC = AudioPlayerViewController()
+        audioPlayerVC.audioAction = selectedAction
+        
+        // Present the new view controller
+        navigationController?.pushViewController(audioPlayerVC, animated: true)
+    }
+
     
     
     // Function to calculate time difference between current time and provided full timestamp
@@ -89,14 +111,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return timeFormatter.string(from: date)
     }
     
-    
-    @IBOutlet weak var tableView: UITableView!
+    func loadAudioActions() -> [AudioAction] {
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsDirectory.appendingPathComponent("audioActions.json")
+        
+        do {
+            let data = try Data(contentsOf: filePath)
+            let audioActions = try JSONDecoder().decode([AudioAction].self, from: data)
+            return audioActions
+        } catch {
+            print("Error loading audio actions: \(error)")
+            return []
+        }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        tableView.dataSource = self
-        tableView.delegate = self
+        let nib = UINib(nibName: "ConversationTableViewCell", bundle: nil)
+        recentConversationTableView.register(nib, forCellReuseIdentifier: "ConversationCell")
+        
+        recentConversationTableView.dataSource = self
+        recentConversationTableView.delegate = self
+        
+        actions = loadAudioActions()
     }
 
 
