@@ -27,6 +27,8 @@
 		9A5D50332CA7B740003013D9 /* transcribe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = transcribe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5D50492CA7B743003013D9 /* transcribeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = transcribeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5D50532CA7B743003013D9 /* transcribeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = transcribeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AF3C5252CAC1F57009B41F1 /* test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = test.xcodeproj; sourceTree = "<group>"; };
+		9AF3C57B2CAC2DDA009B41F1 /* test.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = test.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -101,6 +103,20 @@
 				9A5D50332CA7B740003013D9 /* transcribe.app */,
 				9A5D50492CA7B743003013D9 /* transcribeTests.xctest */,
 				9A5D50532CA7B743003013D9 /* transcribeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AF3C5312CAC1F57009B41F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AF3C5882CAC2DDA009B41F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,6 +227,16 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9A5D50342CA7B740003013D9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9AF3C5882CAC2DDA009B41F1 /* Products */;
+					ProjectRef = 9AF3C57B2CAC2DDA009B41F1 /* test.xcodeproj */;
+				},
+				{
+					ProductGroup = 9AF3C5312CAC1F57009B41F1 /* Products */;
+					ProjectRef = 9AF3C5252CAC1F57009B41F1 /* test.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9A5D50322CA7B740003013D9 /* transcribe */,
