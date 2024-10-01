@@ -23,13 +23,12 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
     let currentLanguage = AppSettings.shared.selectedLanguage
     var isSpeaking = false // Track if speech is currently playing
     var speechUtterance: AVSpeechUtterance? // Store the current utterance
+    var recorder: AVAudioRecorder?
     
     @IBOutlet weak var TextInputTextView: UITextView!
     @IBOutlet weak var play: UIButton!
     @IBOutlet weak var clearTextBox: UIButton!
     @IBOutlet weak var SaveAudio: UIButton!
-    @IBOutlet weak var Hindi: UIButton!
-    @IBOutlet weak var English: UIButton!
     
     let placeholderText = "Enter your text here....."
     
@@ -38,8 +37,7 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
 
         setupTextView()
         setupActions()
-//        speechSynthesizer.delegate = self
-        
+        speechSynthesizer.delegate = self // Set the delegate here
     }
     
     private func setupTextView() {
@@ -53,7 +51,6 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
         TextInputTextView.delegate = self
     }
     
-    
     private func setupActions() {
         play.addTarget(self, action: #selector(togglePlayPause), for: .touchUpInside)
         clearTextBox.addTarget(self, action: #selector(clearText), for:.touchUpInside )
@@ -61,7 +58,6 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
     }
     
     @objc func togglePlayPause() {
-        
         guard !TextInputTextView.text.isEmpty && TextInputTextView.text != placeholderText else {
             showAlert("Input required", "Please enter some text to speak.")
             return
@@ -75,6 +71,7 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
             speakText()
         }
     }
+    
     // TextView placeholder management
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == placeholderText {
@@ -99,8 +96,6 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
         speechUtterance = AVSpeechUtterance(string: TextInputTextView.text)
 
         // Get the selected voice, speech speed, and pitch from AppSettings
-        let currentLanguage = AppSettings.shared.selectedLanguage
-//        let selectedVoiceType = AppSettings.shared.selectedVoice
         let speechSpeed = AppSettings.shared.speechSpeed
         let pitch = AppSettings.shared.pitch
 
@@ -130,11 +125,6 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
         }
     }
 
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        isSpeaking = false
-        play.setTitle("Play", for: .normal) // Change button title back to "Play"
-    }
-
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
         isSpeaking = false
         play.setTitle("Resume", for: .normal) // Change button title to "Resume"
@@ -152,7 +142,6 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
         speechSynthesizer.stopSpeaking(at: .immediate)
         isSpeaking = false
         play.setTitle("Play", for: .normal)
-        
     }
     
     // save audio
@@ -167,56 +156,61 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
         let fileName = "\(timestamp)_output.m4a" // Save as .m4a
         let filePath = getDocumentsDirectory().appendingPathComponent(fileName)
 
-        // Audio settings
         let settings: [String: Any] = [
-            AVFormatIDKey: kAudioFormatMPEG4AAC,
-            AVSampleRateKey: 12000,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            AVFormatIDKey: kAudioFormatMPEG4AAC, // AAC format
+            AVSampleRateKey: 44100, // Sample rate (common for audio)
+            AVNumberOfChannelsKey: 1, // Mono audio
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue // High audio quality
         ]
 
         do {
             // Create an audio recorder instance
-            let recorder = try AVAudioRecorder(url: filePath, settings: settings)
-            recorder.record()
+            recorder = try AVAudioRecorder(url: filePath, settings: settings)
+            recorder?.record()
+            
+            print("Recording started...") // Print when recording starts
             
             // Synthesize speech to save audio (without auto-playing)
             let speechUtterance = AVSpeechUtterance(string: TextInputTextView.text)
             speechUtterance.voice = AVSpeechSynthesisVoice(language: currentLanguage)
             speechUtterance.rate = AVSpeechUtteranceDefaultSpeechRate
-                    
-//            speechSynthesizer.delegate = self
-            // Start speaking
+            
+            // Set delegate to stop recording after speech has finished
             speechSynthesizer.speak(speechUtterance)
-            
-            // After the speech is finished, stop the recording
-            // Use a delegate to stop the recording after speech has finished
-            speechSynthesizer.delegate = self
-            
-            
-            print("Audio saved successfully at \(filePath)")
-            showAlert("Success", "Audio saved at \(filePath.lastPathComponent)")
-            
-            // Create a new AudioAction and append it to the array
-            let newAction = AudioAction(
-                titleLabel: "Text to Speech",
-                subTitleLabel: getShortenedText(from: TextInputTextView.text),
-                timestampLabel: getCurrentTimestamp(),
-                playIcon: "play.circle",
-                audioPath: filePath.absoluteString
-            )
-            
-            actions.append(newAction)
-            
-            // Save actions to JSON
-            saveActionsToJSONFile(actions: actions)
 
-            
         } catch {
             showAlert("Error", "Failed to save audio: \(error.localizedDescription)")
         }
     }
-    
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        
+        isSpeaking = false
+        play.setTitle("Play", for: .normal)
+        
+        // Stop recording when speech is finished
+        recorder?.stop()
+        print("Recording completed.") // Print when recording completes
+        
+        // Create a new AudioAction and append it to the array
+        let newAction = AudioAction(
+            titleLabel: "Text to Speech",
+            subTitleLabel: getShortenedText(from: TextInputTextView.text),
+            timestampLabel: getCurrentTimestamp(),
+            playIcon: "play.circle",
+            audioPath: recorder?.url.path ?? "" // Use filePath.path for local file URL
+        )
+
+        actions.append(newAction)
+
+        // Save actions to JSON
+        saveActionsToJSONFile(actions: actions)
+
+        // Show success alert
+        showAlert("Success", "Audio saved successfully at \(recorder?.url.lastPathComponent ?? "unknown file").")
+    }
+
+
     // Utility methods
     private func showAlert(_ title: String, _ message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -251,8 +245,7 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
             try jsonData.write(to: jsonFilePath, options: .atomic)
             print("Actions saved to \(jsonFilePath)")
         } catch {
-            print("Failed to save actions to JSON: \(error)")
+            print("Error saving actions to JSON: \(error.localizedDescription)")
         }
     }
-
 }
