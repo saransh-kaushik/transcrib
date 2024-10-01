@@ -20,7 +20,7 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
     
     var actions = [AudioAction]()
     let speechSynthesizer = AVSpeechSynthesizer()
-    var lang = "en-US"
+    let currentLanguage = AppSettings.shared.selectedLanguage
     var isSpeaking = false // Track if speech is currently playing
     var speechUtterance: AVSpeechUtterance? // Store the current utterance
     
@@ -57,8 +57,6 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
     private func setupActions() {
         play.addTarget(self, action: #selector(togglePlayPause), for: .touchUpInside)
         clearTextBox.addTarget(self, action: #selector(clearText), for:.touchUpInside )
-        Hindi.addTarget(self, action: #selector(changeLanguageToHindi), for: .touchUpInside)
-        English.addTarget(self, action: #selector(changeLanguageToEnglish), for: .touchUpInside)
         SaveAudio.addTarget(self, action: #selector(saveAudioToFile), for: .touchUpInside)
     }
     
@@ -99,8 +97,17 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
         }
         
         speechUtterance = AVSpeechUtterance(string: TextInputTextView.text)
-        speechUtterance?.voice = AVSpeechSynthesisVoice(language: lang)
-        speechUtterance?.rate = AVSpeechUtteranceDefaultSpeechRate
+
+        // Get the selected voice, speech speed, and pitch from AppSettings
+        let currentLanguage = AppSettings.shared.selectedLanguage
+//        let selectedVoiceType = AppSettings.shared.selectedVoice
+        let speechSpeed = AppSettings.shared.speechSpeed
+        let pitch = AppSettings.shared.pitch
+
+        // Apply the speech speed and pitch from settings
+        speechUtterance?.voice = AVSpeechSynthesisVoice(language: currentLanguage)
+        speechUtterance?.rate = speechSpeed // Set the speech rate (speed)
+        speechUtterance?.pitchMultiplier = pitch // Set the pitch multiplier
         
         speechSynthesizer.speak(speechUtterance!)
         isSpeaking = true
@@ -175,7 +182,7 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
             
             // Synthesize speech to save audio (without auto-playing)
             let speechUtterance = AVSpeechUtterance(string: TextInputTextView.text)
-            speechUtterance.voice = AVSpeechSynthesisVoice(language: lang)
+            speechUtterance.voice = AVSpeechSynthesisVoice(language: currentLanguage)
             speechUtterance.rate = AVSpeechUtteranceDefaultSpeechRate
                     
 //            speechSynthesizer.delegate = self
@@ -209,11 +216,6 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
             showAlert("Error", "Failed to save audio: \(error.localizedDescription)")
         }
     }
-
-    
-    // Change language methods
-    @objc func changeLanguageToHindi() { lang = "hi-IN" }
-    @objc func changeLanguageToEnglish() { lang = "en-US" }
     
     // Utility methods
     private func showAlert(_ title: String, _ message: String) {
