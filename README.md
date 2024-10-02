@@ -6,7 +6,9 @@
 
 **Transcribe** is an innovative iOS application that allows users to convert speech to text and vice versa. It is designed to enhance accessibility by providing high-quality speech synthesis and transcription capabilities. Users can easily generate text from spoken words, edit the transcribed text, and save it for future use. The app also includes customizable settings to tailor the user experience, making it a versatile tool for various applications.
 
-![App Screenshot](https://example.com/screenshot.png) <!-- Replace with a screenshot of your app -->
+![Home](./assetsForGithub/Home.png) 
+![Speech To Text](./assetsForGithub/SpeechToText.png) 
+![Text to Speech](./assetsForGithub/TextToSpeech.png) 
 
 ## Features
 
@@ -16,7 +18,7 @@
 - **Save Functionality:** Users can save both the synthesized speech and transcribed text for future reference.
 - **Audio Playback:** Provides functionalities to play, pause, and resume audio playback.
 - **Settings Management:** Includes various settings controllers to customize user preferences.
-  - ![Settings Management](https://example.com/settings.png) <!-- Replace with an image of the settings screen -->
+  - ![Setting](./assetsForGithub/Setting.png) 
   - **Language Preference:** Choose preferred languages for speech synthesis and transcription.
   - **Voice Preference:** Select different voices for speech output.
   - **History Management:** Manage and review previous transcriptions and saved audio.
@@ -30,11 +32,23 @@
 
 ## Technologies Used
 
-- **Programming Language:** Swift
-- **Framework:** AVFoundation for speech synthesis and speech recognition
-- **Development Environment:** Xcode
+- **Programming Language:** Swift  
+![Swift Logo](https://upload.wikimedia.org/wikipedia/commons/9/99/Swift_logo_and_words.svg)
 
-![Tech Stack](https://example.com/techstack.png) <!-- Replace with an image of the tech stack used -->
+- **Frameworks:**  
+  - **UIKit**  
+  ![UIKit Logo](https://developer.apple.com/assets/elements/icons/uikit/uikit-96x96.png)  
+
+  - **AVFoundation**  
+  For speech synthesis and audio management.  
+  ![AVFoundation Logo](https://developer.apple.com/assets/elements/icons/avfoundation/avfoundation-96x96.png)  
+
+  - **Speech**  
+  For speech recognition and handling voice input.  
+  ![Speech Framework Logo](https://developer.apple.com/assets/elements/icons/speech/speech-96x96.png)
+
+- **Development Environment:** Xcode  
+![Xcode Logo](https://upload.wikimedia.org/wikipedia/commons/e/ef/Xcode_Logo.png)
 
 ## Installation
 
