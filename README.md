@@ -68,7 +68,7 @@
    - Select a simulator or connect your iOS device.
    - Click on the **Run** button in Xcode.
 
-4. [Download link to App Store](#) (Add your app store link here).
+4. [Download link to App Store](#)
 
 ## Usage
 
