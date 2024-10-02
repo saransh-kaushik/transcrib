@@ -49,7 +49,7 @@
 
   - **Speech**  
   For speech recognition and handling voice input.  
-  <img src="./assetsForGithub/download.jpg" alt="Speech Framework Logo" width="100" />
+  <img src="./assetsForGithub/download.jpeg" alt="Speech Framework Logo" width="100" />
 
 - **Development Environment:** Xcode  
 <img src="https://developer.apple.com/assets/elements/icons/xcode-12/xcode-12-96x96_2x.png" alt="Xcode Logo" width="100" />
