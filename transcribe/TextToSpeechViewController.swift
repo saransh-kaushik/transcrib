@@ -22,6 +22,7 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
     let speechSynthesizer = AVSpeechSynthesizer()
     let currentLanguage = AppSettings.shared.selectedLanguage
     var isSpeaking = false // Track if speech is currently playing
+    var isSavingAudio = false
     var speechUtterance: AVSpeechUtterance? // Store the current utterance
     var recorder: AVAudioRecorder?
     
@@ -176,6 +177,7 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
             speechUtterance.rate = AVSpeechUtteranceDefaultSpeechRate
             
             // Set delegate to stop recording after speech has finished
+            isSavingAudio = true
             speechSynthesizer.speak(speechUtterance)
 
         } catch {
@@ -192,22 +194,26 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
         recorder?.stop()
         print("Recording completed.") // Print when recording completes
         
-        // Create a new AudioAction and append it to the array
-        let newAction = AudioAction(
-            titleLabel: "Text to Speech",
-            subTitleLabel: getShortenedText(from: TextInputTextView.text),
-            timestampLabel: getCurrentTimestamp(),
-            playIcon: "play.circle",
-            audioPath: recorder?.url.path ?? "" // Use filePath.path for local file URL
-        )
-
-        actions.append(newAction)
-
-        // Save actions to JSON
-        saveActionsToJSONFile(actions: actions)
-
-        // Show success alert
-        showAlert("Success", "Audio saved successfully at \(recorder?.url.lastPathComponent ?? "unknown file").")
+        if isSavingAudio{
+            // Create a new AudioAction and append it to the array
+            let newAction = AudioAction(
+                titleLabel: "Text to Speech",
+                subTitleLabel: getShortenedText(from: TextInputTextView.text),
+                timestampLabel: getCurrentTimestamp(),
+                playIcon: "play.circle",
+                audioPath: recorder?.url.path ?? "" // Use filePath.path for local file URL
+            )
+            
+            actions.append(newAction)
+            
+            // Save actions to JSON
+            saveActionsToJSONFile(actions: actions)
+            
+            // Show success alert
+            showAlert("Success", "Audio saved successfully at \(recorder?.url.lastPathComponent ?? "unknown file").")
+            
+            isSavingAudio = false
+        }
     }
 
 
