@@ -8,9 +8,9 @@
 
 ## Screenshots
 
-<img src="./assetsForGithub/Home.png" alt="Home" width="600" />
-<img src="./assetsForGithub/SpeechToText.png" alt="Speech To Text" width="600" />
-<img src="./assetsForGithub/TextToSpeech.png" alt="Text to Speech" width="600" />
+<img src="./assetsForGithub/Home.png" alt="Home" width="400" />
+<img src="./assetsForGithub/SpeechToText.png" alt="Speech To Text" width="400" />
+<img src="./assetsForGithub/TextToSpeech.png" alt="Text to Speech" width="400" />
 
 
 
@@ -22,7 +22,7 @@
 - **Save Functionality:** Users can save both the synthesized speech and transcribed text for future reference.
 - **Audio Playback:** Provides functionalities to play, pause, and resume audio playback.
 - **Settings Management:** Includes various settings controllers to customize user preferences.
-  - <img src="./assetsForGithub/Setting.png" alt="Text to Speech" width="600" />
+  - <img src="./assetsForGithub/Setting.png" alt="Text to Speech" width="400" />
   - **Language Preference:** Choose preferred languages for speech synthesis and transcription.
   - **Voice Preference:** Select different voices for speech output.
   - **History Management:** Manage and review previous transcriptions and saved audio.
