@@ -1,73 +1,111 @@
-# Transcrib: Speech to Text & Text to Speech iOS App
+# Transcribe
 
-A user-friendly iOS application that leverages speech recognition and text-to-speech technologies using **UIKit**. It allows users to convert their speech to text and vice versa, customize voice settings, manage history, and more, with a focus on accessibility.
+## Overview
+
+**Transcribe** is an innovative iOS application that allows users to convert speech to text and vice versa. It is designed to enhance accessibility by providing high-quality speech synthesis and transcription capabilities. Users can easily generate text from spoken words, edit the transcribed text, and save it for future use. The app also includes customizable settings to tailor the user experience, making it a versatile tool for various applications.
 
 ## Features
 
-- **Speech to Text**: Convert spoken words into text in real-time.
-- **Text to Speech**: Listen to text being read aloud with customizable voice settings.
-- **History Management**: Save or clear recent transcriptions and text-to-speech conversions.
-- **Voice Customization**: Adjust voice preferences, including pitch and speed.
-- **Language Support**: Supports English language for both speech recognition and text-to-speech.
+- **Text-to-Speech:** Converts user-input text into synthesized speech using customizable voice settings, including speed and pitch.
+- **Speech-to-Text:** Transcribes spoken words into editable text.
+- **Text Editing:** Allows users to edit the transcribed text before saving.
+- **Save Functionality:** Users can save both the synthesized speech and transcribed text for future reference.
+- **Audio Playback:** Provides functionalities to play, pause, and resume audio playback.
+- **Settings Management:** Includes various settings controllers to customize user preferences.
+  - **Language Preference:** Choose preferred languages for speech synthesis and transcription.
+  - **Voice Preference:** Select different voices for speech output.
+  - **History Management:** Manage and review previous transcriptions and saved audio.
+  - **Data Privacy:** Set data privacy preferences for the application.
+  - **Sound Settings:** Customize sound alerts and playback settings.
+  - **Appearance Settings:** Adjust the app's visual theme.
+  - **Notifications:** Configure notification preferences.
+  - **About:** Information about the app and its developers.
+  - **Feedback:** Provide user feedback for app improvement.
+- **User Alerts:** Notifies users about successful actions, such as saving audio or transcription.
 
-## Screenshots
+## Technologies Used
 
-_Include some screenshots here once the app design is completed._
+- **Programming Language:** Swift
+- **Framework:** AVFoundation for speech synthesis and speech recognition
+- **Development Environment:** Xcode
 
-## Getting Started
+## Installation
 
-### Prerequisites
-
-- **Xcode 16** or later
-- iOS 15 or later
-- **SF Pro Font** (Download from [Apple](https://developer.apple.com/fonts/))
-
-### Installation
-
-1. **Clone the repository**:
+1. Clone the repository:
    ```bash
    git clone https://github.com/Pushparaj13811/transcrib.git
    ```
 
-2. **Open the project in Xcode**:
-   ```bash
-   cd transcrib
-   open transcrib.xcodeproj
-   ```
+2. Open the project in Xcode:
+   - Navigate to the cloned directory and open `Transcribe.xcodeproj`.
 
-3. **Run the project**:
-   - Connect a device or use the iOS Simulator, then click the **Run** button in Xcode.
+3. Run the app:
+   - Select a simulator or connect your iOS device.
+   - Click on the **Run** button in Xcode.
 
-### Usage
+4. [Download link to App Store](#) (Add your app store link here).
 
-1. **Speech to Text**: Click the microphone icon to start transcribing your speech into text.
-2. **Text to Speech**: Type or paste any text and click the play button to hear it spoken aloud.
-3. **Voice Settings**: Access the settings page to modify voice preferences, such as changing the voice type (male/female) or adjusting speech speed and pitch.
-4. **History**: View a log of your recent transcriptions and speech-to-text conversions, with the option to clear them.
+## Usage
 
-## Technologies Used
+1. **Text-to-Speech:**
+   - Enter the text you wish to convert to speech in the provided text view.
+   - Click the **Play** button to start the speech synthesis.
 
-- **UIKit**: For building the user interface.
-- **Speech Framework**: For handling speech-to-text.
-- **AVFoundation**: For text-to-speech functionality.
-- **SF Pro Font**: Apple's system font used for UI design.
-  
-## Project Structure
+2. **Speech-to-Text:**
+   - Tap on the **Microphone** button to start speech recognition.
+   - Speak clearly, and the app will transcribe your speech into text.
 
-- `SpeechToTextViewController.swift`: Handles the speech-to-text functionality.
-- `TextToSpeechViewController.swift`: Handles the text-to-speech functionality.
-- `SettingsViewController.swift`: Manages user preferences for voice settings and history.
-- `Main.storyboard`: Contains the layout for each view controller using UIKit.
+3. **Edit Text:**
+   - After transcription, you can edit the text as needed.
 
-## Contribution
+4. **Save Audio & Text:**
+   - Click the **Save Audio** button to save the synthesized speech as an audio file.
+   - Use the **Save Text** option to save the edited text.
 
-Feel free to contribute to this project by submitting a pull request or opening an issue.
+5. **Access Settings:**
+   - Navigate to the settings section to customize language, voice, appearance, and more.
+
+6. **Check Saved Files:** The saved audio files and transcriptions will be stored in the app's documents directory.
+
+## Code Structure
+
+The main components of the project are:
+
+- **View Controllers:**
+  - **ViewController:** The main controller managing user interactions and displaying the main features of the app.
+  - **TextToSpeechViewController:** Handles the text-to-speech functionality.
+  - **SpeechToTextViewController:** Manages speech recognition and transcription.
+  - **AudioPlayerViewController:** Manages audio playback features.
+  - **SettingViewController:** Acts as the container for all settings view controllers.
+  - **LanguagePreferenceViewController:** Manages language preferences.
+  - **VoicePreferenceViewController:** Allows users to select different voices for speech synthesis.
+  - **HistoryManagementViewController:** Handles the review and management of saved transcriptions and audio files.
+  - **DataPrivacyViewController:** Manages user data privacy settings.
+  - **SoundSettingViewController:** Customizes sound and playback settings.
+  - **AppearanceSettingViewController:** Adjusts the app's visual theme.
+  - **NotificationsViewController:** Configures notification settings.
+  - **AboutViewController:** Displays information about the app and its developers.
+  - **FeedbackViewController:** Collects user feedback for improvements.
+
+## Contributing
+
+Contributions are welcome! If you would like to contribute to the project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Thanks to Apple for providing the AVFoundation framework.
+- Inspiration from various open-source speech synthesis and transcription projects.
 
 ## Contact
 
-For any inquiries, feel free to reach out via email:
-- **[Pushparaj Mehta]** - pushparajmehta002@gmail.com
+For any inquiries or issues, please contact me at [pushparajmehta002@gmail.com] or open an issue on GitHub.
