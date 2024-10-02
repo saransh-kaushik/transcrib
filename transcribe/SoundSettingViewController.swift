@@ -51,7 +51,7 @@ class SoundSettingViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#FF6026")
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(saveSettingsTapped), for: .touchUpInside)
+        button.addTarget(SoundSettingViewController.self, action: #selector(saveSettingsTapped), for: .touchUpInside)
         return button
     }()
 
