@@ -1,6 +1,6 @@
 # Transcribe
 
-![Transcribe Logo](./logo.png) <!-- Replace with your app's logo URL -->
+![Transcribe Logo](./assetsForGithub/logo.png) <!-- Replace with your app's logo URL -->
 
 ## Overview
 
