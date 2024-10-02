@@ -1,6 +1,6 @@
 # Transcribe
 
-![Transcribe Logo](https://example.com/logo.png) <!-- Replace with your app's logo URL -->
+![Transcribe Logo](./logo.png) <!-- Replace with your app's logo URL -->
 
 ## Overview
 
