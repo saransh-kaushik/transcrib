@@ -1,8 +1,12 @@
 # Transcribe
 
+![Transcribe Logo](https://example.com/logo.png) <!-- Replace with your app's logo URL -->
+
 ## Overview
 
 **Transcribe** is an innovative iOS application that allows users to convert speech to text and vice versa. It is designed to enhance accessibility by providing high-quality speech synthesis and transcription capabilities. Users can easily generate text from spoken words, edit the transcribed text, and save it for future use. The app also includes customizable settings to tailor the user experience, making it a versatile tool for various applications.
+
+![App Screenshot](https://example.com/screenshot.png) <!-- Replace with a screenshot of your app -->
 
 ## Features
 
@@ -12,6 +16,7 @@
 - **Save Functionality:** Users can save both the synthesized speech and transcribed text for future reference.
 - **Audio Playback:** Provides functionalities to play, pause, and resume audio playback.
 - **Settings Management:** Includes various settings controllers to customize user preferences.
+  - ![Settings Management](https://example.com/settings.png) <!-- Replace with an image of the settings screen -->
   - **Language Preference:** Choose preferred languages for speech synthesis and transcription.
   - **Voice Preference:** Select different voices for speech output.
   - **History Management:** Manage and review previous transcriptions and saved audio.
@@ -29,12 +34,14 @@
 - **Framework:** AVFoundation for speech synthesis and speech recognition
 - **Development Environment:** Xcode
 
+![Tech Stack](https://example.com/techstack.png) <!-- Replace with an image of the tech stack used -->
+
 ## Installation
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Pushparaj13811/transcrib.git
-   ```
+
 
 2. Open the project in Xcode:
    - Navigate to the cloned directory and open `Transcribe.xcodeproj`.
