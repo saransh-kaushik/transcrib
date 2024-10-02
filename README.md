@@ -37,22 +37,22 @@
 ## Technologies Used
 
 - **Programming Language:** Swift  
-![Swift Logo](https://developer.apple.com/swift/images/swift-og.png)
+<img src="https://developer.apple.com/swift/images/swift-og.png" alt="Swift Logo" width="100" />
 
 - **Frameworks:**  
   - **UIKit**  
-  ![UIKit Logo](https://developer.apple.com/assets/elements/icons/uikit/uikit-96x96.png)  
+  <img src="https://developer.apple.com/assets/elements/icons/uikit/uikit-96x96.png" alt="UIKit Logo" width="100" />  
 
   - **AVFoundation**  
   For speech synthesis and audio management.  
-  ![AVFoundation Logo](https://developer.apple.com/assets/elements/icons/avfoundation/avfoundation-96x96.png)  
+  <img src="https://developer.apple.com/assets/elements/icons/avfoundation/avfoundation-96x96.png" alt="AVFoundation Logo" width="100" />  
 
   - **Speech**  
   For speech recognition and handling voice input.  
-  ![Speech Framework Logo](https://developer.apple.com/assets/elements/icons/speech/speech-96x96.png)
+  <img src="./assetsForGithub/download.jpg" alt="Speech Framework Logo" width="100" />
 
 - **Development Environment:** Xcode  
-![Xcode Logo](https://developer.apple.com/assets/elements/icons/xcode-12/xcode-12-96x96_2x.png)
+<img src="https://developer.apple.com/assets/elements/icons/xcode-12/xcode-12-96x96_2x.png" alt="Xcode Logo" width="100" />
 
 ## Installation
 
