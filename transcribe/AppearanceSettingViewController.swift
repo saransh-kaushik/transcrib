@@ -22,6 +22,7 @@ class AppearanceSettingViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Light", for: .normal)
         button.backgroundColor = .lightGray
+        button.tintColor = UIColor(hex: "#FF6026")
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(AppearanceSettingViewController.self, action: #selector(themeButtonTapped(_:)), for: .touchUpInside)
@@ -32,6 +33,7 @@ class AppearanceSettingViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Dark", for: .normal)
         button.backgroundColor = .darkGray
+        button.tintColor = UIColor(hex: "#FF6026")
         button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(AppearanceSettingViewController.self, action: #selector(themeButtonTapped(_:)), for: .touchUpInside)
@@ -51,6 +53,7 @@ class AppearanceSettingViewController: UIViewController {
         slider.maximumValue = 30
         slider.value = 16 // Default font size
         slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.minimumTrackTintColor = UIColor(hex: "#FF6026")
         return slider
     }()
     

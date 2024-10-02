@@ -14,6 +14,7 @@ class NotificationsViewController: UIViewController {
     let enableNotificationsSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.isOn = true // Default state
+        toggle.onTintColor = UIColor(hex: "#FF6026")
         toggle.translatesAutoresizingMaskIntoConstraints = false
         return toggle
     }()
@@ -35,6 +36,7 @@ class NotificationsViewController: UIViewController {
     let messageNotificationsSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.isOn = true // Default state
+        toggle.onTintColor = UIColor(hex: "#FF6026")
         toggle.translatesAutoresizingMaskIntoConstraints = false
         return toggle
     }()
@@ -49,6 +51,7 @@ class NotificationsViewController: UIViewController {
     let commentNotificationsSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.isOn = false // Default state
+        toggle.onTintColor = UIColor(hex: "#FF6026")
         toggle.translatesAutoresizingMaskIntoConstraints = false
         return toggle
     }()
@@ -63,6 +66,7 @@ class NotificationsViewController: UIViewController {
     let likeNotificationsSwitch: UISwitch = {
         let toggle = UISwitch()
         toggle.isOn = false // Default state
+        toggle.onTintColor = UIColor(hex: "#FF6026")
         toggle.translatesAutoresizingMaskIntoConstraints = false
         return toggle
     }()

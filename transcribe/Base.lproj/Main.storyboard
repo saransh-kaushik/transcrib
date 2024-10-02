@@ -36,7 +36,9 @@
                                 </constraints>
                                 <color key="tintColor" red="1" green="0.37647058820000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Play"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Play" cornerStyle="medium">
+                                    <color key="baseBackgroundColor" red="1" green="0.37647058820000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QW1-Kc-YXW">
                                 <rect key="frame" x="11" y="554" width="160" height="48"/>
@@ -47,7 +49,7 @@
                                 </constraints>
                                 <color key="tintColor" red="1" green="0.37647058820000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Save Audio"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Save Audio" cornerStyle="medium"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHu-uk-prs">
                                 <rect key="frame" x="222" y="554" width="160" height="48"/>
@@ -58,7 +60,7 @@
                                 </constraints>
                                 <color key="tintColor" red="1" green="0.37647058820000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Clear"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Clear" cornerStyle="medium"/>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="o4h-NR-Wko">
                                 <rect key="frame" x="258" y="569.33333333333326" width="18" height="18"/>
@@ -110,10 +112,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Text to Speech" style="editor" id="qQB-qO-oEZ"/>
                     <connections>
-                        <outlet property="SaveAudio" destination="QW1-Kc-YXW" id="xRO-Pn-8n6"/>
                         <outlet property="TextInputTextView" destination="5sv-Hf-RiH" id="UfB-2L-DwL"/>
                         <outlet property="clearTextBox" destination="yHu-uk-prs" id="W0d-Ze-5y5"/>
                         <outlet property="play" destination="cD6-ja-Kjc" id="ofZ-b4-L1j"/>
+                        <outlet property="saveAudio" destination="QW1-Kc-YXW" id="ae3-Gd-Ieu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TY7-iq-x3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

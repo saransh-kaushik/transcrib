@@ -27,7 +27,6 @@ class HistoryManagementViewController: UIViewController, UITableViewDelegate, UI
         button.backgroundColor = UIColor(hex: "#FF6026")
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(HistoryManagementViewController.self, action: #selector(deleteHistoryTapped), for: .touchUpInside)
         return button
     }()
 
@@ -39,6 +38,9 @@ class HistoryManagementViewController: UIViewController, UITableViewDelegate, UI
         setupUI()
         setupTableView()
         loadHistory()
+        
+        // Attach the delete action to the button
+        deleteHistoryButton.addTarget(self, action: #selector(deleteHistoryTapped), for: .touchUpInside)
     }
 
     private func setupUI() {
@@ -85,13 +87,37 @@ class HistoryManagementViewController: UIViewController, UITableViewDelegate, UI
 
     @objc func deleteHistoryTapped() {
         let alert = UIAlertController(title: "Confirm Deletion", message: "Are you sure you want to delete all history?", preferredStyle: .alert)
+        
+        // Cancel action
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // Delete action
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.conversations.removeAll() // Clear the history
-            self.historyTableView.reloadData() // Refresh the table view
-            self.saveHistory() // Save empty history to file
+            self.deleteAllHistory()
         }))
+        
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func deleteAllHistory() {
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsDirectory.appendingPathComponent("audioActions.json")
+
+        // Clear local data
+        self.conversations.removeAll()
+        self.historyTableView.reloadData()
+
+        // Remove the file from the file system
+        do {
+            if fileManager.fileExists(atPath: filePath.path) {
+                try fileManager.removeItem(at: filePath)
+                print("History file deleted successfully.")
+            }
+            saveHistory() // Save the empty history to file after deletion.
+        } catch {
+            print("Error deleting history file: \(error)")
+        }
     }
 
     private func saveHistory() {
@@ -108,7 +134,7 @@ class HistoryManagementViewController: UIViewController, UITableViewDelegate, UI
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return conversations.count // Return actual history count
+        return conversations.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,22 +150,19 @@ class HistoryManagementViewController: UIViewController, UITableViewDelegate, UI
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65 // Set the cell height to 65 points
+        return 65
     }
 
-    // Add spacing between cells
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10 // Optional: Set the height of the header
+        return 10
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 10)) // Creates a space above the first cell
+        return UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 10))
     }
     
-    // Reload audio actions and refresh the table when the view appears
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Reload the audio actions and refresh the table view
         loadHistory()
         historyTableView.reloadData()
     }
