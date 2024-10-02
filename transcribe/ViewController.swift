@@ -60,13 +60,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let selectedAction = actions[indexPath.row]
         
-        // Initialize AudioPlayerViewController programmatically
-        let audioPlayerVC = AudioPlayerViewController()
-        audioPlayerVC.audioAction = selectedAction
-        
-        // Present the new view controller
-        navigationController?.pushViewController(audioPlayerVC, animated: true)
+        // Instantiate AudioViewController from the storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let audioPlayerVC = storyboard.instantiateViewController(withIdentifier: "AudioViewController") as? AudioViewController {
+            
+            // Pass the selected action to the audio player view controller
+            audioPlayerVC.audioAction = selectedAction
+            
+            // Push the audio player view controller onto the navigation stack
+            navigationController?.pushViewController(audioPlayerVC, animated: true)
+        } else {
+            print("Failed to instantiate AudioViewController")
+        }
     }
+
 
     
     
