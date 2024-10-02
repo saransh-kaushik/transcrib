@@ -6,9 +6,13 @@
 
 **Transcribe** is an innovative iOS application that allows users to convert speech to text and vice versa. It is designed to enhance accessibility by providing high-quality speech synthesis and transcription capabilities. Users can easily generate text from spoken words, edit the transcribed text, and save it for future use. The app also includes customizable settings to tailor the user experience, making it a versatile tool for various applications.
 
-![Home](./assetsForGithub/Home.png) 
-![Speech To Text](./assetsForGithub/SpeechToText.png) 
-![Text to Speech](./assetsForGithub/TextToSpeech.png) 
+## Screenshots
+
+<img src="./assetsForGithub/Home.png" alt="Home" width="600" />
+<img src="./assetsForGithub/SpeechToText.png" alt="Speech To Text" width="600" />
+<img src="./assetsForGithub/TextToSpeech.png" alt="Text to Speech" width="600" />
+
+
 
 ## Features
 
@@ -18,7 +22,7 @@
 - **Save Functionality:** Users can save both the synthesized speech and transcribed text for future reference.
 - **Audio Playback:** Provides functionalities to play, pause, and resume audio playback.
 - **Settings Management:** Includes various settings controllers to customize user preferences.
-  - ![Setting](./assetsForGithub/Setting.png) 
+  - <img src="./assetsForGithub/Setting.png" alt="Text to Speech" width="600" />
   - **Language Preference:** Choose preferred languages for speech synthesis and transcription.
   - **Voice Preference:** Select different voices for speech output.
   - **History Management:** Manage and review previous transcriptions and saved audio.
@@ -33,7 +37,7 @@
 ## Technologies Used
 
 - **Programming Language:** Swift  
-![Swift Logo](https://upload.wikimedia.org/wikipedia/commons/9/99/Swift_logo_and_words.svg)
+![Swift Logo](https://developer.apple.com/swift/images/swift-og.png)
 
 - **Frameworks:**  
   - **UIKit**  
@@ -48,7 +52,7 @@
   ![Speech Framework Logo](https://developer.apple.com/assets/elements/icons/speech/speech-96x96.png)
 
 - **Development Environment:** Xcode  
-![Xcode Logo](https://upload.wikimedia.org/wikipedia/commons/e/ef/Xcode_Logo.png)
+![Xcode Logo](https://developer.apple.com/assets/elements/icons/xcode-12/xcode-12-96x96_2x.png)
 
 ## Installation
 
