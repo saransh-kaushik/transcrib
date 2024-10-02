@@ -133,4 +133,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any inquiries or issues, please contact me at [pushparajmehta002@gmail.com] or open an issue on GitHub.
+For any inquiries or issues, please contact me at [contact](mailto:pushparajmehta002@gmail.com) or open an issue on GitHub.
