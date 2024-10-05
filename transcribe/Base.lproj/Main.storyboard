@@ -426,7 +426,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Start / Stop"/>
                                 <connections>
-                                    <action selector="startTranscription:" destination="kxm-zk-qWM" eventType="valueChanged" id="UTh-EF-4JZ"/>
+                                    <action selector="startTranscription:" destination="kxm-zk-qWM" eventType="touchUpInside" id="Bei-kp-Rgx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2d-96-5Fp">
@@ -438,7 +438,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Edit"/>
                                 <connections>
-                                    <action selector="editText:" destination="kxm-zk-qWM" eventType="valueChanged" id="9t5-QL-Xzb"/>
+                                    <action selector="editText:" destination="kxm-zk-qWM" eventType="touchUpInside" id="PYk-LD-Z6T"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIr-iZ-79N">
@@ -450,7 +450,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Save"/>
                                 <connections>
-                                    <action selector="saveText:" destination="kxm-zk-qWM" eventType="valueChanged" id="tXV-Qc-l3S"/>
+                                    <action selector="saveText:" destination="kxm-zk-qWM" eventType="touchUpInside" id="G1k-Et-MPY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5F-CM-oiE">
@@ -462,6 +462,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Share"/>
                                 <connections>
+                                    <action selector="shareText:" destination="kxm-zk-qWM" eventType="touchUpInside" id="IeG-Nu-ygH"/>
                                     <action selector="shareText:" destination="kxm-zk-qWM" eventType="valueChanged" id="wED-hd-6AW"/>
                                 </connections>
                             </button>
