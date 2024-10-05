@@ -8,8 +8,8 @@ import UIKit
 
 class LanguagePreferenceViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
-    let languages = ["English", "Spanish", "French", "German", "Chinese", "Hindi", "Nepali"]
-    let languageCodes = ["en-US", "es-ES", "fr-FR", "de-DE", "zh-CN", "hi-IN", "ne-NP"]
+    let languages = ["English", "Spanish", "French", "German", "Chinese", "Hindi", "Nepali", "Gujarati"]
+    let languageCodes = ["en-US", "es-ES", "fr-FR", "de-DE", "zh-CN", "hi-IN", "ne-NP", "gu-IN"]
     
     var selectedLanguageCode: String = AppSettings.shared.selectedLanguage
     
