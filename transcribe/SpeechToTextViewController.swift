@@ -55,7 +55,7 @@ class SpeechToTextViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
 
-    @IBAction func startTranscription(_ sender: UIButton) {
+    @IBAction func startTranscription(_ sender: Any) {
         if audioEngine.isRunning {
             stopRecording()
             startBtn.setTitle("Start", for: .normal)
@@ -64,7 +64,6 @@ class SpeechToTextViewController: UIViewController, SFSpeechRecognizerDelegate {
             startBtn.setTitle("Stop", for: .normal)
         }
     }
-
     private func startRecording() {
         // Check if speech recognizer is available
         guard let recognizer = speechRecognizer, recognizer.isAvailable else {
@@ -150,15 +149,17 @@ class SpeechToTextViewController: UIViewController, SFSpeechRecognizerDelegate {
             }
         }
     }
-
+    
     @IBAction func editText(_ sender: UIButton) {
         liveTranscriptionAreaTextView.isEditable = true
         liveTranscriptionAreaTextView.becomeFirstResponder()
     }
-
-    @IBAction func shareText(_ sender: UIButton) {
+    
+    @IBAction func shareText(_ sender: Any) {
         guard let text = liveTranscriptionAreaTextView.text else { return }
         let activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
+
     }
+    
 }
