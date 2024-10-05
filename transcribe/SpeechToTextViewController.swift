@@ -16,8 +16,9 @@ class SpeechToTextViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var textSaveButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var liveTranscriptionAreaTextView: UITextView!
+    let currentLanguage = AppSettings.shared.selectedLanguage
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+    private lazy var speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: currentLanguage))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
