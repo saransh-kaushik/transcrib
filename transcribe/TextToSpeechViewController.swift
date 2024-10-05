@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeechSynthesizerDelegate {
+class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeechSynthesizerDelegate,UITextFieldDelegate {
     
     struct AudioAction: Codable {
         let titleLabel: String
@@ -38,8 +38,40 @@ class TextToSpeechViewController: UIViewController, UITextViewDelegate, AVSpeech
 
         setupTextView()
         setupActions()
+        
         speechSynthesizer.delegate = self // Set the delegate here
+        TextInputTextView.delegate = self
+        
+        // Add tap gesture to dismiss keyboard when tapping outside
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+
     }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true) // Dismiss the keyboard
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Dismiss the keyboard when return is pressed
+        return true
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+
+    // Dismiss keyboard when 'Return' is pressed in UITextView
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" { // Check if 'Return' key is pressed
+            textView.resignFirstResponder() // Dismiss the keyboard
+            return false
+        }
+        return true
+    }
+
+
     
     private func setupTextView() {
         TextInputTextView.layer.borderColor = UIColor.black.cgColor
